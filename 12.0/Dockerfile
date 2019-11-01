@@ -71,7 +71,8 @@ RUN set -x; \
         && dpkg --force-depends -i odoo.deb \
         && apt-get update \
         && apt-get -y install -f --no-install-recommends \
-        && rm -rf /var/lib/apt/lists/* odoo.deb
+        && rm -rf /var/lib/apt/lists/* odoo.deb \
+        && pip install slugify
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
@@ -92,7 +93,7 @@ ENV ODOO_RC /etc/odoo/odoo.conf
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 
 # Set default user when running the container
-USER odoo
+USER root
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["odoo"]
