@@ -59,7 +59,8 @@ RUN set -x;\
     && apt-get update \
     && apt-get install -y nodejs \
     && npm install -g rtlcss \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && pip3 install slugify
 
 # Install Odoo
 ENV ODOO_VERSION 12.0
